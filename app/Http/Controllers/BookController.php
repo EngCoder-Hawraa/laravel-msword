@@ -44,6 +44,50 @@ class BookController extends Controller
         $templateProcessor->saveAs($fileName . '.docx');
         return response()->download($fileName . '.docx')->deleteFileAfterSend(true);
     }
+
+    public function create()
+    {
+        return view('books.create');
+    }
+
+    public function store(Request $request)
+    {
+        $content = $request->content;
+
+        $dom = new DOMDocument();
+        $dom->loadHTML($content, 9);
+
+        $images = $dom->getElementsByTagName('img');
+
+        foreach ($images as $key => $img){
+            $data = base64_decode(explode(',',explode(';', $img-> getAttribute('src'))[1][1]));
+            $image_name = "/upload" . time(). $key.'png';
+            file_put_contents(public_path().$image_name,$data);
+
+            $img->removeAttribute('src');
+            $img->setAttribute('src', $image_name);
+        }
+        $content = $dom->saveHTML();
+
+        Book::create([
+            'creator' => $request->creator,
+            'depNameEn' => $request->depNameEn,
+            'depName' => $request->depName,
+            'toPerson' => $request->toPerson,
+            'variableName' => $request->variableName,
+            'signDate' => $request->signDate,
+            'content' => $content,
+            'thanks' => $request->thanks,
+            'greeting' => $request->greeting,
+            'toDo' => $request->toDo,
+            'attach' => $request->attach,
+            'signatory' => $request->signatory,
+            'image' => $request->image,
+            'position' => $request->position,
+        ]);
+
+        return redirect('/');
+    }
 }
 
 

@@ -26,6 +26,9 @@ Route::get('/', function () {
 
     Route::get('/books', [BookController::class, 'index'])->name('book.index');
     Route::get('books/{id}', [BookController::class, 'show'])->name('book.show');
+    Route::get('/book/create', [BookController::class, 'create'])->name('books.create');
+    Route::post('/book/store', [BookController::class, 'store'])->name('books.store');
+    Route::get('/book/edit', [BookController::class, 'edit'])->name('books.edit');
     Route::get('books/word-export/{id}', [BookController::class, 'wordExport'])->name('book.wordExport');
 
     Route::get('/dashboard', function () {
