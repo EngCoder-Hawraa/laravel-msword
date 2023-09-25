@@ -12,6 +12,7 @@ use HTMLPurifier_Config;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use PhpOffice\PhpWord\PhpWord;
+use PhpOffice\PhpWord\Shared\Html;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\Settings;
 use PhpOffice\PhpWord\Element\Section;
@@ -164,7 +165,7 @@ class BookController extends Controller
         $book = Book::findOrFail($id);
 
         // Create a new PhpWord instance
-        $phpWord = new \PhpOffice\PhpWord\PhpWord();
+        $phpWord = new PhpWord();
 
         // Create a Word document section
         $section = $phpWord->addSection();
@@ -193,7 +194,7 @@ class BookController extends Controller
         $cleanedHtml = $purifier->purify($html);
 
         // Create a Word HTML renderer
-        $renderer = new \PhpOffice\PhpWord\Shared\Html();
+        $renderer = new Html();
 
         // Render HTML content into the Word document section
         $renderer->addHtml($section, $cleanedHtml);
@@ -204,10 +205,15 @@ class BookController extends Controller
             if ($element instanceof \PhpOffice\PhpWord\Element\Table) {
                 // Style the table
                 $table = $element;
-                $table->getStyle()->setBorderSize(6);
-                $table->getStyle()->setBorderColor('000000'); // Border color (black)
+                $table->getStyle()->setBorderSize(16);
+                $table->getStyle()->setBorderColor('#eeeeee');
 
-                // You can iterate through the rows and cells here for more customization if needed
+//                foreach ($table->getRows() as $row) {
+//                    foreach ($row->getCells() as $cell) {
+//                        $cell->getAlignment()->setHorizontal(\PhpOffice\PhpWord\SimpleType\Jc::CENTER);
+//                        $cell->getAlignment()->setVertical(\PhpOffice\PhpWord\SimpleType\JcTableVerticalAlignment::CENTER);
+//                    }
+//                }
             }
         }
 
@@ -215,7 +221,7 @@ class BookController extends Controller
         $fileName = $book->creator . '.docx';
 
         // Save the Word document using PhpWord
-        $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
+        $objWriter = IOFactory::createWriter($phpWord, 'Word2007');
         $objWriter->save($fileName);
 
         // Provide a download link for the generated document
@@ -292,8 +298,12 @@ class BookController extends Controller
         $book = Book::findOrFail($id);
 
         // Load the cleaned HTML content into DOMDocument
+        $config = HTMLPurifier_Config::createDefault();
+        $purifier = new HTMLPurifier($config);
+        $cleanedHtml = $purifier->purify($request->content);
+
         $dom = new DOMDocument();
-        $dom->loadHTML($request->content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $dom->loadHTML($cleanedHtml, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 
         $images = $dom->getElementsByTagName('img');
 
