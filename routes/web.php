@@ -25,10 +25,12 @@ Route::get('/', function () {
     Route::get('users/word-export/{id}', [UserController::class, 'wordExport'])->name('user.wordExport');
 
     Route::get('/books', [BookController::class, 'index'])->name('book.index');
-    Route::get('books/{id}', [BookController::class, 'show'])->name('book.show');
-    Route::get('/book/create', [BookController::class, 'create'])->name('books.create');
+    Route::get('book/{id}', [BookController::class, 'show'])->name('book.show');
+    Route::get('/books/create', [BookController::class, 'create'])->name('books.create');
     Route::post('/book/store', [BookController::class, 'store'])->name('books.store');
-    Route::get('/book/edit', [BookController::class, 'edit'])->name('books.edit');
+    Route::get('/book/edit/{id}', [BookController::class, 'edit'])->name('books.edit');
+    Route::post('/book/update/{id}', [BookController::class, 'update'])->name('books.update');
+    Route::get('/book/delete/{id}', [BookController::class, 'destroy'])->name('books.delete');
     Route::get('books/word-export/{id}', [BookController::class, 'wordExport'])->name('book.wordExport');
 
     Route::get('/dashboard', function () {

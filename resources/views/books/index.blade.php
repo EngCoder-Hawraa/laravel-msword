@@ -12,15 +12,15 @@
       <title>PHP Word</title>
   </head>
   <body>
-  <div class="col-md-6 mt-5 ml-5">
-      <a href="{{ url('book/create') }}" class="btn bg-primary pull-right text-white">
-          <i class="fa fa-pencil"></i> أضافة كتاب
-      </a>
-  </div>
-    <div class="container-fluid">
+    <div class="container">
+        <div class="mt-5">
+            <a href="{{ url('/books/create') }}" class="btn bg-primary pull-right text-white">
+                <i class="fa fa-pencil"></i> أضافة كتاب
+            </a>
+        </div>
         <div class="row">
             <div class="col">
-                <table class="table table-bordered mt-5 table-responsive">
+                <table class="table table-bordered mt-5 table-responsive text-center">
                     <thead>
                       <tr>
                           <th scope="col">#</th>
@@ -30,14 +30,7 @@
                           <th scope="col">toPerson</th>
                           <th scope="col">variableName</th>
                           <th scope="col">signDate</th>
-                          <th scope="col">content</th>
-                          <th scope="col">thanks</th>
-                          <th scope="col">greeting</th>
-                          <th scope="col">toDo</th>
-                          <th scope="col">attach</th>
-                          <th scope="col">signatory</th>
-                          <th scope="col">image</th>
-                          <th scope="col">position</th>
+                          <th scope="col">الاجراء</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -50,19 +43,11 @@
                         <td>{{ $book->toPerson }}</td>
                         <td>{{ $book->variableName }}</td>
                         <td>{{ $book->signDate }}</td>
-                        <td>{{ $book->content }}</td>
-                        <td>{{ $book->thanks }}</td>
-                        <td>{{ $book->greeting }}</td>
-                        <td>{{ $book->toDo }}</td>
-                        <td>{{ $book->attach }}</td>
-                        <td>{{ $book->signatory }}</td>
-                        <td>{{ $book->image }}</td>
-                        <td>{{ $book->position }}</td>
                         <td>
                             <div class="d-flex justify-content-center">
-                                <a class="btn btn-sm btn-warning text-white" href="{{ url('books/' . $book->id) }}">عرض</a>
-                                <a class="btn btn-sm bg-success text-white mx-1" href="">تعديل</a>
-                                <a class="btn btn-sm bg-danger text-white delete" href="">حذف</a>
+                                <a class="btn btn-sm btn-warning text-white" href="{{ url('book/' . $book->id) }}">عرض</a>
+                                <a class="btn btn-sm bg-success text-white mx-1" href="{{ url('book/edit/' . $book->id) }}">تعديل</a>
+                                <a class="btn btn-sm bg-danger text-white delete" href="{{ url('book/delete/' . $book->id) }}">حذف</a>
                             </div>
                         </td>
                       </tr>

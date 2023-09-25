@@ -16,7 +16,7 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <table class="table table-dark table-bordered mt-5">
+            <table class="table bg-primary table-bordered mt-5 text-white">
                 <thead>
                   <tr>
                     <th scope="col" colspan="2">Book's information</th>
@@ -53,7 +53,7 @@
                     </tr>
                     <tr>
                         <th scope="row">content</th>
-                        <td>{{ $book->content }}</td>
+                        <td class="bg-white text-dark">{!! $book->content !!}</td>
                     </tr>
                     <tr>
                         <th scope="row">thanks</th>
@@ -85,7 +85,9 @@
                     </tr>
                     </tbody>
               </table>
-            <a href="{{ url('books/word-export/' . $book->id) }}" class="btn btn-sm btn-primary">Export Word</a>
+            <a href="{{ route('book.wordExport', ['id' => $book->id]) }}" class="btn btn-sm btn-primary">Export Word</a>
+
+{{--            <a href="{{ url('books/word-export/' . $book->id) }}" class="btn btn-sm btn-primary">Export Word</a>--}}
         </div>
     </div>
 </div>

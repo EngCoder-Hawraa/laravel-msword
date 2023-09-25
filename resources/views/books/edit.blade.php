@@ -24,12 +24,12 @@
                         0px 30px 60px 1px rgba(0,0,0,0.5);
                       border-radius: 8px;">
                         <div class="card-header bg-transparent text-white mx-4">
-                            <small style="font-size:16px;">اضافة كتاب</small>
+                            <small style="font-size:16px;">تعديل كتاب</small>
                         </div>
                         <div class="card-body px-lg-5 py-lg-5">
                             <div class="text-center text-muted mb-4">
                             </div>
-                            <form role="form" name="addBookForm" action="{{ url('book/store') }}" method="post" id="addBookForm">
+                            <form role="form" name="addBookForm" action="{{ url('book/update/' . $book->id) }}" method="post" id="addBookForm">
                                 @csrf
                                 <div class="form-group mb-3">
                                     <div class="input-group">
@@ -38,8 +38,8 @@
                                         </div>
                                         <input type="text" class="form-control border-0 shadow px-2"
                                                style="border-radius:4px 0 0 4px; margin-right:-2px" required name="creator"
-                                               id="creator" value=""
-                                               oninput="this.setCustomValidity('')" placeholder="creator">
+                                               id="creator"
+                                               oninput="this.setCustomValidity('')" placeholder="creator" value="{{ $book->creator }}">
                                     </div>
                                     <small id="creator_err" class="form-text text-danger"></small>
                                 </div>
@@ -50,7 +50,7 @@
                                         </div>
                                         <input type="text" class="form-control border-0 shadow px-2"
                                                style="border-radius:4px 0 0 4px; margin-right:-2px" required name="depNameEn"
-                                               id="depNameEn" value=""
+                                               id="depNameEn" value="{{ $book->depNameEn }}"
                                                oninput="this.setCustomValidity('')" placeholder="depNameEn">
                                     </div>
                                     <small id="depNameEn_err" class="form-text text-danger"></small>
@@ -62,7 +62,7 @@
                                         </div>
                                         <input type="text" class="form-control border-0 shadow px-2"
                                                style="border-radius:4px 0 0 4px; margin-right:-2px" required name="depName"
-                                               id="depName" value=""
+                                               id="depName" value="{{ $book->depName }}"
                                                oninput="this.setCustomValidity('')" placeholder="depName">
                                     </div>
                                     <small id="depName_err" class="form-text text-danger"></small>
@@ -74,7 +74,7 @@
                                         </div>
                                         <input type="text" class="form-control border-0 shadow px-2"
                                                style="border-radius:4px 0 0 4px; margin-right:-2px" required name="toPerson"
-                                               id="toPerson" value=""
+                                               id="toPerson" value="{{ $book->toPerson }}"
                                                oninput="this.setCustomValidity('')" placeholder="toPerson">
                                     </div>
                                     <small id="toPerson_err" class="form-text text-danger"></small>
@@ -86,7 +86,7 @@
                                         </div>
                                         <input type="text" class="form-control border-0 shadow px-2"
                                                style="border-radius:4px 0 0 4px; margin-right:-2px" required name="variableName"
-                                               id="variableName" value=""
+                                               id="variableName" value="{{ $book->variableName }}"
                                                oninput="this.setCustomValidity('')" placeholder="variableName">
                                     </div>
                                     <small id="variableName_err" class="form-text text-danger"></small>
@@ -97,7 +97,7 @@
                                             <span class="input-group-text border-0 shadow"><i class="fa-solid fa-user"></i></span>
                                         </div>
                                         <input type="date" class="form-control border-0 shadow px-2"
-                                               style="border-radius:4px 0 0 4px; margin-right:-2px" id="signDate" name="signDate" oninput="this.setCustomValidity('')" value="" placeholder="signDate">
+                                               style="border-radius:4px 0 0 4px; margin-right:-2px" id="signDate" name="signDate" value="{{ date('Y-m-d', strtotime($book->signDate)) }}" placeholder="signDate">
                                     </div>
                                     <small id="signDate_err" class="form-text text-danger"></small>
                                 </div>
@@ -106,7 +106,7 @@
                                         <textarea class="form-control border-0 shadow"
                                                   placeholder="content" id="content" name="content" cols="30"
                                                   rows="10">
-                                        </textarea>
+                                        {{ $book->content }}</textarea>
                                     </div>
                                     <small id="content_err" class="form-text text-danger"></small>
                                 </div>
@@ -117,7 +117,7 @@
                                         </div>
                                         <input type="text" class="form-control border-0 shadow px-2"
                                                style="border-radius:4px 0 0 4px; margin-right:-2px" required name="thanks"
-                                               id="thanks" value=""
+                                               id="thanks" value="{{ $book->thanks }}"
                                                oninput="this.setCustomValidity('')" placeholder="thanks">
                                     </div>
                                     <small id="thanks_err" class="form-text text-danger"></small>
@@ -129,7 +129,7 @@
                                         </div>
                                         <input type="text" class="form-control border-0 shadow px-2"
                                                style="border-radius:4px 0 0 4px; margin-right:-2px" required name="greeting"
-                                               id="greeting" value=""
+                                               id="greeting" value="{{ $book->greeting }}"
                                                oninput="this.setCustomValidity('')" placeholder="greeting">
                                     </div>
                                     <small id="greeting_err" class="form-text text-danger"></small>
@@ -141,7 +141,7 @@
                                         </div>
                                         <input type="text" class="form-control border-0 shadow px-2"
                                                style="border-radius:4px 0 0 4px; margin-right:-2px" required name="toDo"
-                                               id="toDo" value=""
+                                               id="toDo" value="{{ $book->toDo }}"
                                                oninput="this.setCustomValidity('')" placeholder="toDo">
                                     </div>
                                     <small id="toDo_err" class="form-text text-danger"></small>
@@ -153,7 +153,7 @@
                                         </div>
                                         <input type="text" class="form-control border-0 shadow px-2"
                                                style="border-radius:4px 0 0 4px; margin-right:-2px" required name="attach"
-                                               id="attach" value=""
+                                               id="attach" value="{{ $book->attach }}"
                                                oninput="this.setCustomValidity('')" placeholder="attach">
                                     </div>
                                     <small id="attach_err" class="form-text text-danger"></small>
@@ -165,7 +165,7 @@
                                         </div>
                                         <input type="text" class="form-control border-0 shadow px-2"
                                                style="border-radius:4px 0 0 4px; margin-right:-2px" required name="signatory"
-                                               id="signatory" value=""
+                                               id="signatory" value="{{ $book->signatory }}"
                                                oninput="this.setCustomValidity('')" placeholder="signatory">
                                     </div>
                                     <small id="signatory_err" class="form-text text-danger"></small>
@@ -177,7 +177,7 @@
                                         </div>
                                         <input type="text" class="form-control border-0 shadow px-2"
                                                style="border-radius:4px 0 0 4px; margin-right:-2px" required name="image"
-                                               id="image" value=""
+                                               id="image" value="{{ $book->image }}"
                                                oninput="this.setCustomValidity('')" placeholder="image">
                                     </div>
                                     <small id="image_err" class="form-text text-danger"></small>
@@ -189,7 +189,7 @@
                                         </div>
                                         <input type="text" class="form-control border-0 shadow px-2"
                                                style="border-radius:4px 0 0 4px; margin-right:-2px" required name="position"
-                                               id="position" value=""
+                                               id="position" value="{{ $book->position }}"
                                                oninput="this.setCustomValidity('')" placeholder="position">
                                     </div>
                                     <small id="position_err" class="form-text text-danger"></small>
@@ -198,7 +198,7 @@
                                     <div class="col">
                                         <button type="submit"
                                                 class="col-12 btn-primary btn-block py-2"
-                                                style="border-radius:4px">أضافة
+                                                style="border-radius:4px">تعديل
                                         </button>
                                     </div>
                                 </div>
