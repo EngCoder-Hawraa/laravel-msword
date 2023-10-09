@@ -15,7 +15,7 @@
 <div class="container">
     <body class="bg-default">
     <div class="main-content">
-        <div class="container mt-5">
+        <div class="container mt-5 mb-5">
             <div class="row justify-content-center">
                 <div class="col-lg-12 col-md-12">
                     <div class="card bg-dark border-0" style="box-shadow:
@@ -102,11 +102,11 @@
                                     <small id="signDate_err" class="form-text text-danger"></small>
                                 </div>
                                 <div class="mb-3">
-                                    <div class="bg-white border-0 shadow" style="border-radius:4px">
+                                    <div class="bg-white border-0 shadow" style="border-radius: 4px;">
                                         <textarea class="form-control border-0 shadow"
-                                                  placeholder="content" id="content" name="content" cols="30"
-                                                  rows="10">
-                                        {{ $book->content }}</textarea>
+                                                  placeholder="content" id="content" name="content" cols="30" rows="10">
+                                            <?php echo htmlspecialchars($book->content); ?>
+                                        </textarea>
                                     </div>
                                     <small id="content_err" class="form-text text-danger"></small>
                                 </div>

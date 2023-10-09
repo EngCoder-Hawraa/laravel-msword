@@ -18,9 +18,9 @@
                 <i class="fa fa-pencil"></i> أضافة كتاب
             </a>
         </div>
-        <div class="row">
-            <div class="col">
-                <table class="table table-bordered mt-5 table-responsive text-center">
+        <div class="row d-flex justify-content-center">
+            <div class="">
+                <table class="table table-bordered mt-5 mb-5 table-responsive text-center">
                     <thead>
                       <tr>
                           <th scope="col">#</th>
@@ -36,7 +36,7 @@
                     <tbody>
                     @foreach($books as $book)
                       <tr>
-                        <th scope="row">{{ $book->id }}</th>
+                        <td>{{ $book->id }}</td>
                         <td>{{ $book->creator }}</td>
                         <td>{{ $book->depNameEn }}</td>
                         <td>{{ $book->depName }}</td>
@@ -63,6 +63,9 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <!-- include summernote js -->
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+{{--    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>--}}
+
+{{--    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>--}}
+
   </body>
 </html>

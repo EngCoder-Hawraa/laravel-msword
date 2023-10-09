@@ -85,7 +85,7 @@
                     </tr>
                     </tbody>
               </table>
-            <a href="{{ route('book.wordExport', ['id' => $book->id]) }}" class="btn btn-sm btn-primary">Export Word</a>
+            <a href="{{ route('book.wordExport', ['id' => $book->id]) }}" class="btn btn-sm btn-primary mb-5">Export Word</a>
 
 {{--            <a href="{{ url('books/word-export/' . $book->id) }}" class="btn btn-sm btn-primary">Export Word</a>--}}
         </div>
